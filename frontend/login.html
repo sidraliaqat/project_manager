@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SidraayyyManager</title>
+    <style>
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        :root {
+            /* Pantone Color Palette */
+            --sauterne: #f1bd79;
+            --grapeade: #825c84;
+            --almond-peach: #f7d5c9;
+            --almondine: #d5a478;
+            --marsala: #964f4c;
+            --peach-fuzz: #ffbe98;
+            --brandied-apricot: #c97c4e;
+            
+            /* Brand Colors */
+            --primary: var(--grapeade);
+            --primary-dark: #6a4a6b;
+            --primary-light: #9c7a9d;
+            --secondary: var(--sauterne);
+            --accent: var(--marsala);
+            --background: var(--almond-peach);
+            --card: rgba(255, 255, 255, 0.95);
+            --text: #2d3748;
+            --text-light: #718096;
+            --border: #e2e8f0;
+            --white: #ffffff;
+        }
+        
+        body {
+            background: linear-gradient(135deg, 
+                var(--almond-peach) 0%, 
+                var(--peach-fuzz) 50%, 
+                var(--sauterne) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text);
+        }
+        
+        /* Elegant Container */
+        .elegant-container {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--card);
+            border-radius: 32px;
+            box-shadow: 
+                0 20px 40px rgba(130, 92, 132, 0.1),
+                0 10px 20px rgba(150, 79, 76, 0.05);
+            overflow: hidden;
+            display: flex;
+            min-height: 650px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Left Brand Panel */
+        .brand-panel {
+            flex: 1;
+            background: linear-gradient(135deg, 
+                rgba(130, 92, 132, 0.95) 0%, 
+                rgba(150, 79, 76, 0.9) 100%);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, 
+                rgba(255, 190, 152, 0.1) 0%, 
+                transparent 70%);
+        }
+        
+        .logo-container {
+            z-index: 1;
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .logo-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--peach-fuzz), var(--sauterne));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--white);
+            box-shadow: 0 15px 35px rgba(241, 189, 121, 0.3);
+            margin: 0 auto 30px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .brand-name {
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', 'Georgia', serif;
+            background: linear-gradient(135deg, #ffffff, var(--peach-fuzz));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tagline {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 300px;
+            line-height: 1.5;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        /* Right Login Panel */
+        .login-panel {
+            flex: 1.2;
+            background: var(--white);
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .form-header {
+            margin-bottom: 40px;
+        }
+        
+        .form-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', 'Georgia', serif;
+        }
+        
+        .form-header p {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            font-size: 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--white);
+            transition: all 0.3s ease;
+            color: var(--text);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(130, 92, 132, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #a0aec0;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+        
+        /* Remember Me & Forgot Password */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-wrapper input {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .checkbox-wrapper label {
+            font-size: 14px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+        
+        .forgot-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .forgot-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(130, 92, 132, 0.3);
+        }
+        
+        /* Signup Link */
+        .signup-link {
+            text-align: center;
+            font-size: 15px;
+            color: var(--text-light);
+        }
+        
+        .signup-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Message Box */
+        .message-box {
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .message-box.success {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+        
+        .message-box.error {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+        
+        .message-box i {
+            font-size: 18px;
+        }
+        
+        /* Welcome Popup */
+        .welcome-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .welcome-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: popupIn 0.5s ease;
+        }
+        
+        .welcome-content h3 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .welcome-content p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .welcome-btn {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .welcome-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Copyright */
+        .copyright {
+            position: absolute;
+            bottom: 30px;
+            font-size: 13px;
+            opacity: 0.7;
+            z-index: 1;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+        
+        /* Terms Modal */
+        .terms-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+        
+        .terms-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .terms-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .terms-header h3 {
+            color: var(--primary);
+            font-size: 24px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .close-terms {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+        
+        .terms-body {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .terms-section {
+            margin-bottom: 20px;
+        }
+        
+        .terms-section h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes popupIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .elegant-container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            
+            .brand-panel {
+                padding: 40px 30px;
+            }
+            
+            .login-panel {
+                padding: 40px 30px;
+            }
+            
+            .logo-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 38px;
+            }
+            
+            .brand-name {
+                font-size: 42px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .elegant-container {
+                border-radius: 24px;
+            }
+            
+            .brand-name {
+                font-size: 36px;
+            }
+            
+            .form-header h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Welcome Popup -->
+    <div class="welcome-popup" id="welcomePopup">
+        <div class="welcome-content">
+            <h3>🎉 Welcome Back!</h3>
+            <p>You have successfully logged into SidraayyyManager. Start managing your projects like a pro!</p>
+            <button class="welcome-btn" id="closeWelcome">Continue to Dashboard</button>
+        </div>
+    </div>
+    
+    <!-- Terms Modal -->
+    <div class="terms-modal" id="termsModal">
+        <div class="terms-content">
+            <div class="terms-header">
+                <h3>Terms of Service & Privacy Policy</h3>
+                <button class="close-terms" id="closeTerms">&times;</button>
+            </div>
+            <div class="terms-body">
+                <div class="terms-section">
+                    <h4>1. Acceptance of Terms</h4>
+                    <p>By accessing and using SidraayyyManager, you accept and agree to be bound by these Terms of Service.</p>
+                </div>
+                <div class="terms-section">
+                    <h4>2. User Responsibilities</h4>
+                    <p>You are responsible for maintaining the confidentiality of your account and password.</p>
+                </div>
+                <div class="terms-section">
+                    <h4>3. Data Privacy</h4>
+                    <p>We respect your privacy and are committed to protecting your personal data.</p>
+                </div>
+                <div class="terms-section">
+                    <h4>4. Service Modifications</h4>
+                    <p>We reserve the right to modify or discontinue the service at any time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="elegant-container">
+        <!-- Left Brand Panel -->
+        <div class="brand-panel">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h1 class="brand-name">SidraayyyManager</h1>
+                <p class="tagline">Professional Project Management</p>
+            </div>
+            
+            <div class="copyright">
+                SidraayyyManager
+            </div>
+        </div>
+        
+        <!-- Right Login Panel -->
+        <div class="login-panel">
+            <div class="form-header">
+                <h2>Sign In</h2>
+                <p>Access your project dashboard</p>
+            </div>
+            
+            <div id="messageBox" class="message-box"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" class="form-input" placeholder="sidraayyy@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-options">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+                
+                <div class="signup-link">
+                    Don't have an account? 
+                    <a href="signup.html">Create account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                password.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        // Show message function
+        function showMessage(text, type) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${text}</span>
+            `;
+            messageBox.className = `message-box ${type}`;
+            messageBox.style.display = 'flex';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageBox.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // Show welcome popup
+        function showWelcomePopup() {
+            const popup = document.getElementById('welcomePopup');
+            popup.style.display = 'flex';
+        }
+        
+        // Close welcome popup
+        document.getElementById('closeWelcome').addEventListener('click', function() {
+            document.getElementById('welcomePopup').style.display = 'none';
+            window.location.href = 'index.html';
+        });
+        
+        // Terms modal functions
+        function showTermsModal() {
+            document.getElementById('termsModal').style.display = 'flex';
+        }
+        
+        document.getElementById('closeTerms').addEventListener('click', function() {
+            document.getElementById('termsModal').style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const termsModal = document.getElementById('termsModal');
+            const welcomePopup = document.getElementById('welcomePopup');
+            
+            if (event.target === termsModal) {
+                termsModal.style.display = 'none';
+            }
+            if (event.target === welcomePopup) {
+                welcomePopup.style.display = 'none';
+            }
+        });
+        
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Validation
+            if (!email || !password) {
+                showMessage('Please fill all fields', 'error');
+                return;
+            }
+            
+            // Show loading
+            const originalText = loginBtn.innerHTML;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+            loginBtn.disabled = true;
+            
+            try {
+                // Try to login
+                const response = await fetch('http://localhost:3000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        email, 
+                        password,
+                        remember 
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        // Save token and user data
+                        localStorage.setItem('sidraayyy_token', data.token);
+                        localStorage.setItem('sidraayyy_user', JSON.stringify(data.user));
+                        
+                        // Show welcome popup instead of redirecting immediately
+                        showWelcomePopup();
+                    } else {
+                        showMessage(data.message || 'Invalid credentials', 'error');
+                    }
+                } else {
+                    // Demo mode - For testing without backend
+                    const demoUser = {
+                        firstName: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
+                        lastName: 'User',
+                        email: email,
+                        role: 'admin'
+                    };
+                    
+                    localStorage.setItem('sidraayyy_token', 'demo_jwt_token_' + Date.now());
+                    localStorage.setItem('sidraayyy_user', JSON.stringify(demoUser));
+                    
+                    // Show welcome popup
+                    showWelcomePopup();
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                // Demo mode - For testing without backend
+                const demoUser = {
+                    firstName: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
+                    lastName: 'User',
+                    email: email,
+                    role: 'admin'
+                };
+                
+                localStorage.setItem('sidraayyy_token', 'demo_jwt_token_' + Date.now());
+                localStorage.setItem('sidraayyy_user', JSON.stringify(demoUser));
+                
+                // Show welcome popup
+                showWelcomePopup();
+                
+            } finally {
+                // Reset button
+                loginBtn.innerHTML = originalText;
+                loginBtn.disabled = false;
+            }
+        });
+        
+        // Demo credentials shortcut (Ctrl + D)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'd') {
+                e.preventDefault();
+                document.getElementById('email').value = 'sidraayyy@email.com';
+                document.getElementById('password').value = 'password123';
+                showMessage('Demo credentials loaded! Press Enter to login.', 'success');
+            }
+        });
+        
+        // Auto-focus email input
+        document.getElementById('email').focus();
+        
+        // Enter key to submit
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+            }
+        });
+    </script>
+</body>
+</html>
