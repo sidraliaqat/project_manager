@@ -1,39 +1,72 @@
-# Toot Project Manager
+SidraayyyManager
 
-A full-stack project management application with modern UI and real-time capabilities.
+A clean and modern project management web application designed to help individuals and teams organize projects, track tasks, and collaborate effectively.
 
-## Features
+## 🎥 Demo Preview
 
-- Create, read, update, and delete projects
-- Project categorization by status and priority
-- Progress tracking
-- Activity timeline
-- Responsive design
-- RESTful API backend
+![Website Demo](video.mp4)
 
-## Tech Stack
 
-**Frontend:**
-- HTML5, CSS3, JavaScript (ES6+)
-- Font Awesome icons
-- Google Fonts (Poppins)
+🚀 Features
+Projects
+Create & manage projects
+Set deadlines and status
+Assign team members
 
-**Backend:**
-- Node.js
-- Express.js
-- MongoDB with Mongoose
-- REST API
+Tasks
+To-Do / In-Progress / Done board
+Priority levels
+Drag-and-drop
+Deadline reminders
 
-## Installation
+Team
+Add members
+Assign tasks
+Track responsibilities
 
-### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB (local or cloud instance)
-- Git
+UI / Design
+Pantone-based color palette
+Light/Dark theme
+Fully responsive
+Smooth animations
 
-### Steps
+🛠 Tech Stack
+Frontend: HTML, CSS, JavaScript
+Backend: Node.js, Express.js, MongoDB (optional)
+UI: Font Awesome, Google Fonts
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/toot-project-manager.git
-   cd toot-project-manager
+📦 Installation
+git clone https://github.com/yourusername/sidraayyy-project-manager.git
+cd sidraayyy-project-manager
+
+Backend
+cd backend
+npm install
+npm run dev
+
+Frontend
+Open your browser at: http://localhost:5000
+
+📁 Project Structure
+project-manager/
+│── frontend/
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/
+│       ├── dashboard.js
+│       └── api.js
+└── backend/
+    ├── server.js
+    └── package.json
+
+🔌 API Endpoints
+
+GET /api/projects
+POST /api/projects
+GET /api/tasks
+POST /api/tasks
+GET /api/test
+
+
+👤 Author
+Sidra Liaqat
