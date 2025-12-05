@@ -2,35 +2,54 @@ SidraayyyManager
 
 A clean and modern project management web application designed to help individuals and teams organize projects, track tasks, and collaborate effectively.
 
-## 🎥 Demo Preview
+🎥 Demo Preview
 
+![Website Demo](video.zip)
 ![Website Demo](video.mp4)
 
+https://github.com/yourusername/yourrepo/blob/main/video.mp4
+
+(If the embedded video doesn’t auto-play on GitHub, click the link above to view the demo.)
 
 🚀 Features
 Projects
+
 Create & manage projects
+
 Set deadlines and status
+
 Assign team members
 
 Tasks
+
 To-Do / In-Progress / Done board
+
 Priority levels
-Drag-and-drop
+
+Drag-and-drop movement
+
 Deadline reminders
 
 Team
+
 Add members
+
 Assign tasks
+
 Track responsibilities
 
 UI / Design
+
 Pantone-based color palette
+
 Light/Dark theme
+
 Fully responsive
+
 Smooth animations
 
 🛠 Tech Stack
+
 Frontend: HTML, CSS, JavaScript
 Backend: Node.js, Express.js, MongoDB (optional)
 UI: Font Awesome, Google Fonts
@@ -45,7 +64,9 @@ npm install
 npm run dev
 
 Frontend
-Open your browser at: http://localhost:5000
+
+Open your browser at:
+http://localhost:5000
 
 📁 Project Structure
 project-manager/
@@ -62,12 +83,18 @@ project-manager/
 🔌 API Endpoints
 
 GET /api/projects
+
 POST /api/projects
+
 GET /api/tasks
+
 POST /api/tasks
+
 GET /api/test
 
-
 👤 Author
+
 Sidra Liaqat
+
+
 
